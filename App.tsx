@@ -179,7 +179,8 @@ const App: React.FC = () => {
               {originalImage && (
                 <>
                   <div className="lg:col-span-1 bg-gray-800/50 rounded-2xl shadow-lg p-6 fade-in">
-                      <h2 className="text-xl font-semibold mb-6 text-center text-purple-300">Sélectionnez un Style</h2>
+                      <h2 className="text-xl font-semibold mb-4 text-center text-purple-300">Sélectionnez un Style</h2>
+                      
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                         {STYLES.map((style) => (
                           <button

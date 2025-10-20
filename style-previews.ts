@@ -1,0 +1,28 @@
+import { Style } from './types';
+
+export const STYLE_PREVIEWS: Record<Style, string> = {
+  'Dessin animé': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/cartoon.webp',
+  'Photo années 50': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/50s-photo.webp',
+  'Peinture réaliste': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/realistic-painting.webp',
+  'Dessin au crayon': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/pencil-drawing.webp',
+  'Figurine en argile': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/clay-figurine.webp',
+  'Cyberpunk': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/cyberpunk.webp',
+  'Steampunk': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/steampunk.webp',
+  'Aquarelle': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/watercolor.webp',
+  'Pop Art': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/pop-art.webp',
+  'Impressionnisme': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/impressionism.webp',
+  'Surréalisme': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/surrealism.webp',
+  'Art linéaire minimaliste': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/minimalist-line-art.webp',
+  'Rendu 3D': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/3d-render.webp',
+  'Pixel Art': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/pixel-art.webp',
+  'BD vintage': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/vintage-comic.webp',
+  'Vitrail': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/stained-glass.webp',
+  'Art Déco': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/art-deco.webp',
+  'Cubisme': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/cubism.webp',
+  'Art Nouveau': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/art-nouveau.webp',
+  'Fantasy': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/fantasy.webp',
+  'Vaporwave': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/vaporwave.webp',
+  'Style Gothique': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/gothic.webp',
+  'Manga': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/manga.webp',
+  'Mosaïque': 'https://storage.googleapis.com/gemini-ui-params/style-transfer/mosaic.webp',
+};
