@@ -1,0 +1,5 @@
+{
+  "name": "Transfert de Style d'Image",
+  "description": "Téléchargez une image et transformez-la dans un nouveau style artistique à l'aide de l'API Gemini. Choisissez parmi des styles comme dessin animé, années 50, réaliste, dessin au crayon, et plus encore pour voir vos photos sous un nouveau jour.",
+  "requestFramePermissions": []
+}
