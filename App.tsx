@@ -16,6 +16,12 @@ const DownloadIcon: React.FC = () => (
     </svg>
 );
 
+const ShareIcon: React.FC = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
+    </svg>
+);
+
 const App: React.FC = () => {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
   const [transformedImage, setTransformedImage] = useState<string | null>(null);
@@ -114,18 +120,50 @@ const App: React.FC = () => {
 
   const handleDownload = () => {
     if (!transformedImage) return;
-    const link = document.createElement('a');
-    link.href = transformedImage;
-    
+
     const mimeType = transformedImage.match(/data:(.*);/)?.[1] ?? 'image/png';
     const extension = mimeType.split('/')[1] ?? 'png';
     const safeStyleName = selectedStyle?.toString().toLowerCase().replace(/\s+/g, '-') || 'styled';
-
-    link.download = `transformed-${safeStyleName}.${extension}`;
+    const fileName = `transformed-${safeStyleName}.${extension}`;
+    
+    const link = document.createElement('a');
+    link.href = transformedImage;
+    link.download = fileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
+
+  const handleShare = async () => {
+    if (!transformedImage) return;
+
+    try {
+      const mimeType = transformedImage.match(/data:(.*);/)?.[1] ?? 'image/png';
+      const extension = mimeType.split('/')[1] ?? 'png';
+      const safeStyleName = selectedStyle?.toString().toLowerCase().replace(/\s+/g, '-') || 'styled';
+      const fileName = `transformed-${safeStyleName}.${extension}`;
+
+      const response = await fetch(transformedImage);
+      const blob = await response.blob();
+      const file = new File([blob], fileName, { type: mimeType });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'Image Transformée',
+          text: `Voici mon image transformée dans le style ${selectedStyle}.`,
+        });
+      } else {
+        setError("Le partage de fichiers n'est pas pris en charge sur cet appareil ou ce navigateur.");
+      }
+    } catch (error) {
+      if ((error as DOMException)?.name !== 'AbortError') {
+        console.error("Erreur de partage :", error);
+        setError("Une erreur est survenue lors du partage de l'image.");
+      }
+    }
+  };
+
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 font-sans p-4 sm:p-6 lg:p-8">
@@ -243,13 +281,24 @@ const App: React.FC = () => {
                       )}
                     </div>
                     {transformedImage && !isLoading && (
-                        <button
-                            onClick={handleDownload}
-                            className="mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
-                        >
-                            <DownloadIcon />
-                            Télécharger l'image
-                        </button>
+                       <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                         <button
+                           onClick={handleDownload}
+                           className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+                         >
+                           <DownloadIcon />
+                           Télécharger
+                         </button>
+                         {navigator.share && (
+                            <button
+                                onClick={handleShare}
+                                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+                            >
+                                <ShareIcon />
+                                Partager
+                            </button>
+                         )}
+                       </div>
                     )}
                   </div>
                 </>
